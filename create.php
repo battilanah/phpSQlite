@@ -15,7 +15,7 @@ session_start();
 
 <!DOCTYPE html>
 <html>
-    <head>
+    <head><meta name="viewport" content="width=device-width, initial-scale=1.0"><link href="screen.css" rel="stylesheet">
         <meta charset="utf-8" />
         <title>Mon Compte</title>
     </head>
@@ -24,9 +24,13 @@ session_start();
 
         <p>Veuillez entrer un nom d'utilisateur et un mot de passe:</p>
         <form action="data.php" method="post">
-            <p>
+            <p><label for="pseudo">Votre pseudo de joueur</label>
                 <input type="text" name="pseudo">
+                <label for="couleur">votre couleur</label>
+                <input type="text" name="couleur" />
+                <label for="mot_de_passe">Votre mdp</label>
             <input type="password" name="mot_de_passe" />
+
             <input type="submit" value="Valider" />
             </p>
         </form>

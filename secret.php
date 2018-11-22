@@ -1,29 +1,57 @@
 <?php session_start();
+?>
 
-    
-
-
-
+<?php
 if( isset($_POST['pseudo']) and isset($_POST['mot_de_passe']) ) {
-    $db = new SQLite3('sqlite:users.db');
-    $name=$_POST['pseudo'];
-    $req = $db->prepare('SELECT password FROM users WHERE username=:username');
-    $req->execute(array(
-        'username' => $name,
-        ));
+
+    $db = new PDO('sqlite:pokemon.db');
+
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $db->exec("CREATE TABLE IF NOT EXISTS users (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL,
+          pwd TEXT NOT NULL)
+             ");
+
+    $pseudo=$_POST['pseudo'];
+    $pass=$_POST['mot_de_passe'];
 
 
-		if($req->rowCount()>0) {
+    $req = "SELECT * FROM users WHERE name=:name AND pwd=:pwd";
+    $stmt = $db->prepare($req);
+    $stmt->bindParam(':name', $pseudo);
+    $stmt->bindParam(':pwd', $pass);
+    $stmt->execute();
+    $row = $stmt->fetchAll();
+    //AFFICHAGE DE TOUS LES UTILISATEURS
+  /*  $stmt = $db->prepare("SELECT * FROM users");
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    print_r($result);
+*/
+
+$res= count($row);
+
+/*header('location:protection.php');*/
+
+		if($res>0) {
 			header("Location: session.php");
 		}
 		else {
-	        session_start();
-	        $_SESSION['user']=$user;
-			header('location: protection.php');
+            echo ("<script>
+    window.alert('ce compte n\'existe pas !');
+    window.location.href='protection.php';
+    </script>");
+
+
 		}
+
+
 }
 
 
+$_SESSION['pseudo']=$_POST['pseudo'];
 
 
 

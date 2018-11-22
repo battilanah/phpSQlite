@@ -1,32 +1,38 @@
-
 <?php session_start();
 ?>
 
 <?php
-
 if( isset($_POST['pseudo']) and isset($_POST['mot_de_passe']) ) {
-    $db = new PDO('sqlite: pokemon.db');
-    $name=$_POST['pseudo'];
-    $pwd=$_POST['mot_de_passe'];
+
+    $db = new PDO('sqlite:pokemon.db');
+
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $db->exec("CREATE TABLE IF NOT EXISTS users (
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          name TEXT NOT NULL,
+          pwd TEXT NOT NULL)
+             ");
+
+    $pseudo=$_POST['pseudo'];
+    $pass=$_POST['mot_de_passe'];
 
 
-$req = "INSERT INTO users (name, pwd) VALUES($name , $pwd)";
-    $db->exec($req);
- echo(var_dump($db));
-try {
-    $req = "SELECT PWD FROM users WHERE name=a ";
-    $res = $db->exec($req);
+    $req = "INSERT INTO users (name, pwd) VALUES(:pseudo , :pass)";
+    $stmt = $db->prepare($req);
+    $stmt->bindParam(':pseudo', $pseudo);
+    $stmt->bindParam(':pass', $pass);
+    $stmt->execute();
+  /*  //AFFICHAGE DE TOUS LES UTILISATEURS
+    $stmt = $db->prepare("SELECT * FROM users");
+    $stmt->execute();
+    $result = $stmt->fetchAll();
+    print_r($result);*/
+    header('location:second.php');
+
 }
-catch(PDOException $e)
-{
-    echo "Connection failed: " . $e->getMessage();
-}
-echo $res;
 
 
-}
-
-/*header('location:protection.php');*/
 ?>
 
 
