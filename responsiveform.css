@@ -62,7 +62,7 @@ input[type=submit]
     margin-bottom: 20px;
     margin-right: 10px;
     margin-left: 10px ;
-    width:45%;
+    width:100%;
     padding: 15px;
     border-radius:5px;
     border:1px solid #7ac9b7;
@@ -75,7 +75,7 @@ input[type=submit]
 button {
     margin-bottom: 20px;
    margin-left: 10px;
-    width:45%;
+    width:20%;
     padding: 15px;
     border-radius:5px;
     border:1px solid #7ac9b7;

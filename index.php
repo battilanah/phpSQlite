@@ -33,14 +33,18 @@ session_start();?>
 </textarea>
         <div id="validation">
         <input id="submit" type="submit" value="Se connecter">
-        <button onclick="myComptes()">Pas encore inscrit?</button>
+
         </div>
     </form>
+
 </div>
+<button onclick="Redirect()">Pas encore inscrit?</button>
 <script>
-    function myComptes(){
-        window.location.href="create.php";
+    function Redirect(){
+        window.location.href='create.php';
+
     }
+
 </script>
 </body>
 </html>

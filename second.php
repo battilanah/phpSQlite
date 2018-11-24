@@ -11,13 +11,16 @@ session_start();
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
        
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
         <title>Mes petits comptes</title>
         <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
         <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'></script>
+        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <link href="main.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="responsiveform.css">
+        <link rel="stylesheet" media="screen and (max-width: 600px) and (min-width: 351px)" href="responsiveform2.css" />
+        <link rel="stylesheet" media="screen and (max-width: 380px)" href="responsiveform3.css" />
 
 
     </head>
@@ -25,7 +28,7 @@ session_start();
         <p>Possédez vous des petits comptes?</p>
         <button onclick="myFunction()">oui</button>
         <button onclick="Redirect()">non</button>
-        <form  id="myform" action="" method="post" style="display: none">
+        <form  id="myForm" action="" method="post" style="display: none">
             <p>
                 <label for="petits">Combien de petits comptes possédez-vous?</label>
                 <input type="text" name="petits" id="petits"/>
@@ -55,8 +58,7 @@ session_start();
 
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+
                         </div>
                     </div>
                 </div>
@@ -67,7 +69,7 @@ session_start();
 
 
             function myFunction() {
-                let x = document.getElementById("myform");
+                let x = document.getElementById("myForm");
                 if (x.style.display === "none") {
                     x.style.display = "block";
                 } else {
@@ -86,12 +88,23 @@ session_start();
          a.style.display = "none";
      }
  }
-            $('#myform').on('submit', function(e){
-                $('#myModal').modal('show');
-                e.preventDefault();
-            });
-        </script>
 
+                $("#myForm").submit(function(e){
+                    e.preventDefault();
+                    $.ajax({
+                        type : 'POST',
+                        data: $("#myForm").serialize(),
+                        url : 'url',
+                        success : function(data){
+                            $("#myModal").modal("show");
+
+                        }
+                    });
+                    return false;
+                });
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 
     </body>

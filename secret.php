@@ -2,7 +2,7 @@
 ?>
 
 <?php
-if( isset($_POST['pseudo']) and isset($_POST['mot_de_passe']) ) {
+if(!empty($_POST['pseudo']) && !empty($_POST['mot_de_passe']) ) {
     $pseudo=$_POST['pseudo'];
     $pass=$_POST['mot_de_passe'];
 
@@ -11,10 +11,10 @@ if( isset($_POST['pseudo']) and isset($_POST['mot_de_passe']) ) {
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $db->exec("CREATE TABLE IF NOT EXISTS users (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          name TEXT NOT NULL,
-          pwd TEXT NOT NULL)
-             ");
+         id INTEGER PRIMARY KEY AUTOINCREMENT,
+         name TEXT NOT NULL,
+         pwd TEXT NOT NULL)
+            ");
 
 
 
@@ -26,31 +26,38 @@ if( isset($_POST['pseudo']) and isset($_POST['mot_de_passe']) ) {
     $stmt->execute();
     $row = $stmt->fetchAll();
     //AFFICHAGE DE TOUS LES UTILISATEURS
-  /*  $stmt = $db->prepare("SELECT * FROM users");
-    $stmt->execute();
-    $result = $stmt->fetchAll();
-    print_r($result);
-*/
+    /*  $stmt = $db->prepare("SELECT * FROM users");
+      $stmt->execute();
+      $result = $stmt->fetchAll();
+      print_r($result);
+  */
 
-$res= count($row);
+    $res= count($row);
 
-/*header('location:protection.php');*/
+    /*header('location:protection.php');*/
 
-		if($res>0) {
-			header("Location: session.php");
-		}
-		else {
-            echo ("<script>
-    window.alert('ce compte n\'existe pas !');
-    window.location.href='index.php';
-    </script>");
+    if($res>0) {
+        header("Location: session.php");
+    }
+    else {
+        echo ("<script>
+   window.alert('ce compte n\'existe pas !');
+   window.location.href='index.php';
+   </script>");
 
 
-		}
+    }
 
 
 }
+else{
 
+    echo ("<script>
+   window.alert('ce compte n\'existe pas !');
+   window.location.href='index.php';
+   </script>");
+
+}
 
 $_SESSION['pseudo']=$_POST['pseudo'];
 
