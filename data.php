@@ -11,17 +11,20 @@ if( isset($_POST['pseudo']) and isset($_POST['mot_de_passe']) ) {
     $db->exec("CREATE TABLE IF NOT EXISTS users (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           name TEXT NOT NULL,
-          pwd TEXT NOT NULL)
+          pwd TEXT NOT NULL,
+          couleur TEXT NOT NULL)
              ");
 
     $pseudo=$_POST['pseudo'];
     $pass=$_POST['mot_de_passe'];
+    $couleur=$_POST['couleur'];
 
 
-    $req = "INSERT INTO users (name, pwd) VALUES(:pseudo , :pass)";
+    $req = "INSERT INTO users (name, pwd, couleur) VALUES(:pseudo , :pass, :couleur)";
     $stmt = $db->prepare($req);
     $stmt->bindParam(':pseudo', $pseudo);
     $stmt->bindParam(':pass', $pass);
+    $stmt->bindParam(':couleur', $couleur);
     $stmt->execute();
   /*  //AFFICHAGE DE TOUS LES UTILISATEURS
     $stmt = $db->prepare("SELECT * FROM users");

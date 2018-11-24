@@ -9,15 +9,18 @@
         width: auto;
         margin: 0;
         padding: 0;
+        background-image: url("deoxys.jpg");
     }
 
     /* fixer une largeur maximale de 100% aux éléments potentiellement problématiques */
 
-    img,
     table,
     td,
     th,
-    tr,
+    tr{
+        display: inline;
+    }
+    img,
     p,
     blockquote,
     code,

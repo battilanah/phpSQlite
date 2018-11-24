@@ -1,0 +1,110 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Slab);
+* {
+    /* With these codes padding and border does not increase it's width and gives intuitive style.*/
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    float:left;
+    width:100%;
+    height:80%;
+    background: url('main.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    font-family: 'Roboto Slab', serif;
+}
+div#envelope{
+    width: 55%;
+    margin: 10px 30% 10px 10%;
+    padding:10px 0;
+    border: 2px solid gray;
+    border-radius:10px;
+}
+form{
+    width:70%;
+    margin:4% 15%;
+}
+header{
+    background-color: #4180C5;
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 8px;
+    margin-top: -11px;
+    margin-bottom: 1px;
+    border-radius: 10px 10px 0 0;
+    color: aliceblue;
+}
+
+/* Makes responsive fields. Sets size and field alignment.*/
+input[type=text]{
+    margin-bottom: 20px;
+    margin-top: 10px;
+    width:100%;
+    padding: 15px;
+    border-radius:5px;
+    border:1px solid #7ac9b7;
+}
+input[type=password]{
+    margin-bottom: 20px;
+    margin-top: 10px;
+    width:100%;
+    padding: 15px;
+    border-radius:5px;
+    border:1px solid #7ac9b7;
+
+}
+input[type=submit]
+{
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px ;
+    width:45%;
+    padding: 15px;
+    border-radius:5px;
+    border:1px solid #7ac9b7;
+    background-color: #4180C5;
+    color: aliceblue;
+    font-size:15px;
+    cursor:pointer;
+    display: inline-block}
+
+button {
+    margin-bottom: 20px;
+   margin-left: 10px;
+    width:45%;
+    padding: 15px;
+    border-radius:5px;
+    border:1px solid #7ac9b7;
+    background-color: #4180C5;
+    color: aliceblue;
+    font-size:15px;
+    cursor:pointer;
+    display: inline-block;
+}
+#submit:hover
+{
+    background-color: black;
+
+}
+div#validation.button{
+    float: left;
+}
+div#validation.submit{
+    float: left;
+}
+textarea{
+    width:100%;
+    padding: 15px;
+    margin-top: 10px;
+    border:1px solid #7ac9b7;
+    border-radius:5px;
+    margin-bottom: 20px;
+    resize:none;
+}
+input[type=text]:focus,textarea:focus {
+    border-color: #4697e4;
+}

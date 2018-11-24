@@ -15,6 +15,17 @@ Released   : 20130706
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <style>
+        body{
+            background: url("tab.png") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            height: 100%;
+
+        }
+    </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon go</title>
@@ -22,7 +33,7 @@ Released   : 20130706
     <meta name="description" content="" />
 
 
-    <link href="screen.css" rel="stylesheet">
+
     <![endif]-->
 </head>
    <body>
@@ -37,6 +48,22 @@ Released   : 20130706
        <input type="text" name="pseudo" value="<?php echo ($_SESSION['pseudo']) ?>">
        <input type="submit" name="envoyer">
    </form>
+  <p> <?php if($_SESSION['pseudo']=="dawn3785"){
+       ?> <p>Vous êtes admin!</p>
+       <p>Vous avez le privilège de pouvoir rentrer la date et le nom de l'arène du prochain raid ex </p>
+
+       <form action="planification.php" method="post">
+           <label for="jour">Jour:</label>
+       <input type="text" name="jour">
+           <label for="appt">heure </label>
+   <input type="time" id="appt" name="appt"
+          min="9:00"  required>
+           <label for="arene">arène:</label>
+           <input type="text" name=""arène">
+   <input type="submit" name="valider">
+   <?php } ?></p>
+       </form>
+
 
    <button onclick="redirect()">voir les inscrits</button>
 
@@ -76,13 +103,14 @@ Released   : 20130706
        window.location.href='tableau.php';
    }
 
-  function myFunction(){
-      var x=document.getElementById("myForm");
+  function myFunction() {
+      var x = document.getElementById("myForm");
       if (x.style.display = "none") {
           x.style.display = "block";
       } else {
           x.style.display = "none";
       }
-  }</script>
+  }
+  </script>
    </body>
 </html>

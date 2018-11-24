@@ -3,6 +3,8 @@
 
 <?php
 if( isset($_POST['pseudo']) and isset($_POST['mot_de_passe']) ) {
+    $pseudo=$_POST['pseudo'];
+    $pass=$_POST['mot_de_passe'];
 
     $db = new PDO('sqlite:pokemon.db');
 
@@ -14,8 +16,7 @@ if( isset($_POST['pseudo']) and isset($_POST['mot_de_passe']) ) {
           pwd TEXT NOT NULL)
              ");
 
-    $pseudo=$_POST['pseudo'];
-    $pass=$_POST['mot_de_passe'];
+
 
 
     $req = "SELECT * FROM users WHERE name=:name AND pwd=:pwd";
@@ -41,7 +42,7 @@ $res= count($row);
 		else {
             echo ("<script>
     window.alert('ce compte n\'existe pas !');
-    window.location.href='protection.php';
+    window.location.href='index.php';
     </script>");
 
 

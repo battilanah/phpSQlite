@@ -12,6 +12,16 @@ Released   : 20130706
 -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <style>
+        body{
+            background: url("tab.png") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+
+        }
+    </style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon go</title>
@@ -19,12 +29,12 @@ Released   : 20130706
     <meta name="description" content="" />
 
 
-    <link href="screen.css" rel="stylesheet">
+    <link rel="stylesheet" media="screen and (max-width: 400px)" href="tab.css" />
     <![endif]-->
 </head>
 <body>
 
-<?php
+<div><?php
 
 $db = new PDO('sqlite:pokemon.db');
 
@@ -35,37 +45,102 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 
-$req = "SELECT name FROM inscrits  ";
-$stmt = $db->prepare($req);
+$reqBlue = "SELECT * FROM inscrits WHERE couleur='bleu'  ";
+$stmtBlue = $db->prepare($reqBlue);
 
 
-$stmt->execute();
-$row = $stmt->fetch();
+$stmtBlue->execute();
+$rowBlue = $stmtBlue->fetch();
+
+
+    $reqYellow = "SELECT * FROM inscrits WHERE couleur='jaune' ";
+    $stmtYellow = $db->prepare($reqYellow);
+
+
+    $stmtYellow->execute();
+    $rowYellow = $stmtYellow->fetch();
+
+    $reqRed = "SELECT * FROM inscrits WHERE couleur='rouge' ";
+    $stmtRed = $db->prepare($reqRed);
+
+
+    $stmtRed->execute();
+    $rowRed = $stmtRed->fetch();
 
 
 
-//AFFICHAGE DE TOUS LES UTILISATEURS
+
+    //AFFICHAGE DE TOUS LES UTILISATEURS
 /*  $stmt = $db->prepare("SELECT * FROM users");
   $stmt->execute();
   $result = $stmt->fetchAll();
   print_r($result);
 */
+$reqBis = "SELECT * FROM planification  ";
+$stmtBis = $db->prepare($reqBis);
 
+
+$stmtBis->execute();
+$rowBis = $stmtBis->fetch();
+
+if (isset($rowBis['jour']) and isset($rowBis['heure']) and isset($rowBis['arène'])) {
+    echo "<p>" . $rowBis['arène'] . "</p>";
+    echo "<p>" . $rowBis['jour'] . "</p>";
+    echo "<p>" . $rowBis['heure'] . "</p>";
+}
 echo "<table border='1'>
 <tr>
-<th>Pseudo</th>
+<th style='background-color: blue'>Bleu</th>
+
 
 </tr>";
 
-while($test = $stmt->fetch())
+
+
+
+while($testBlue = $stmtBlue->fetch())
 {
     echo "<tr>";
-    echo "<td>" . $test['name']. "</td>";
+    echo "<td>" . $testBlue['name']. "</td>";
+
+    echo "</tr>";
+}
+echo "</table> </br>";
+
+    echo "<table border='1'>
+<tr>
+<th style='background-color: yellow'>Jaune</th>
+
+
+</tr>";
+
+    while($testYellow= $stmtYellow->fetch())
+    {
+        echo "<tr>";
+        echo "<td>" . $testYellow['name']. "</td>";
+
+        echo "</tr>";
+    }
+echo "</table>  </br>";
+
+    echo "<table border='1'>
+<tr>
+<th style='background-color: red'>Rouge</th>
+
+
+</tr>";
+
+while($testRed = $stmtRed->fetch())
+{
+    echo "<tr>";
+    echo "<td>" . $testRed['name']. "</td>";
+
     echo "</tr>";
 }
 echo "</table>";
 
 ?>
+</div>
 <button onclick="myFunction()">Revenir à ma session</button>
 <script>
     function myFunction(){
