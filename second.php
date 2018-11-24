@@ -13,9 +13,9 @@ session_start();
        
 
         <title>Mes petits comptes</title>
-        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
-        <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js'></script>
-        <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="responsiveform.css">
@@ -28,13 +28,13 @@ session_start();
         <p>Possédez vous des petits comptes?</p>
         <button onclick="myFunction()">oui</button>
         <button onclick="Redirect()">non</button>
-        <form  id="myForm" action="" method="post" style="display: none">
-            <p>
+        <form  id="myForm"  method="post" style="display: none">
+
                 <label for="petits">Combien de petits comptes possédez-vous?</label>
                 <input type="text" name="petits" id="petits"/>
 
                 <input type="submit" value="Valider"  id="validate" onclick="openModal()"/>
-            </p>
+            
         </form>
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display : none" >
@@ -89,7 +89,7 @@ session_start();
      }
  }
 
-                $("#myForm").submit(function(e){
+                $("#myForm").on("submit",function(e){
                     e.preventDefault();
                     $.ajax({
                         type : 'POST',
