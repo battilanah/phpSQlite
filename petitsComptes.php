@@ -1,35 +1,67 @@
+
 <?php session_start();
-
-
-$numPetitsComptes=$_POST['petits'];
-
+$_SESSION['pseudo']=$_POST['pseudo'];
 ?>
 
-<form method="post" action="" xmlns="http://www.w3.org/1999/html">
+<?php
+if(!empty($_POST['petitPseudo1'])  ) {
+    $pseudo = $_SESSION['pseudo'];
 
-    <?php
-    for ( $i=0; $i<$numPetitsComptes; $i++) {
-    ?> <input type="text" name ="pseudo">
-        </br>
 
-   <?php } ?>
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
+    $db = new PDO('sqlite:pokemon.db');
+
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $db->exec("CREATE TABLE IF NOT EXISTS petitsComptes (
+         id INTEGER PRIMARY KEY AUTOINCREMENT,
+         pseudo TEXT NOT NULL,
+         petitPseudo TEXT NOT NULL,
+         couleurPetit TEXT NOT NULL )
+            ");
+
+
+
+
+    $keys = array_keys($_POST);
+    $patternPseudo='/petitPseudo/';
+ /*   var_dump($keys);*/
+$result = preg_grep($patternPseudo, $keys);
+/*var_dump($result);*/
+
+
+    $patternCouleur='/petitCouleur/';
+   /*  var_dump($keys);*/
+    $result = preg_grep($patternCouleur, $keys);
+
+  /*  var_dump($result);*/
+
+    foreach ($result as $res){
+      $num = $res[-1];
+      $col1 = $_POST['petitPseudo'.$num];
+      $col2 = $_POST['petitCouleur'.$num];
+        $req = "INSERT INTO petitsComptes (pseudo, petitPseudo, couleurPetit) VALUES(:pseudo , :petitPseudo, :couleurPetit)";
+        $stmt = $db->prepare($req);
+        $stmt->bindParam(':pseudo', $pseudo);
+        $stmt->bindParam(':petitPseudo', $col1);
+        $stmt->bindParam(':couleurPetit', $col2);
+        $stmt->execute();
+    }
+
+
+
+
+
+
+
+
+
+
+        echo("<script>
+   window.alert('Vous êtes inscrit !');
+   window.location.href='index.php';
+   </script>");
+
+
+
+
+}

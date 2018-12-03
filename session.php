@@ -17,12 +17,14 @@ Released   : 20130706
 <head>
     <style>
         body{
-            background: url("tab.png") no-repeat center center fixed;
+            background: url('tab.png') no-repeat center center fixed;
+
+            background-size: cover;
+            /* For older browsers */
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
-            background-size: cover;
-            height: 100%;
+            min-height:800px;}
 
         }
     </style>
@@ -30,6 +32,9 @@ Released   : 20130706
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon go</title>
     <meta name="keywords" content="" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+
     <meta name="description" content="" />
 
 
@@ -43,64 +48,51 @@ Released   : 20130706
    <p>Cliquez sur le bouton suivant pour vous inscrire au prochain raid ex, ou vous supprimer</p>
    <button id="ajout" onclick="myFunction()">s'inscrire</button>
    <button id="supp">se désinscrire</button>
-   <form style="display: none;" action="inscription.php" method="post" id="myForm"  >
-       Pseudo:<br>
+   <form style="display: none;" action="inscription.php" method="post" id="myForm">
+
        <input type="text" name="pseudo" value="<?php echo ($_SESSION['pseudo']) ?>">
        <input type="submit" name="envoyer">
    </form>
   <p> <?php if($_SESSION['pseudo']=="dawn3785"){
        ?> <p>Vous êtes admin!</p>
-       <p>Vous avez le privilège de pouvoir rentrer la date et le nom de l'arène du prochain raid ex </p>
+       <p>Vous avez le privilège de pouvoir rentrer la date et le nom de l'arène du prochain raid ex </p><br>
+      <button onclick="organiser()">Organiser un raid ex</button>
 
-       <form action="planification.php" method="post">
-           <label for="jour">Jour:</label>
-       <input type="text" name="jour">
-           <label for="appt">heure </label>
+       <form action="planification.php" method="post" id="organiser" style="display: none">
+           <label for="jour">Jour:</label><br>
+       <input type="text" name="jour"><br>
+           <label for="appt">heure </label><br>
    <input type="time" id="appt" name="appt"
-          min="9:00"  required>
-           <label for="arene">arène:</label>
-           <input type="text" name=""arène">
+          min="9:00"  required><br>
+           <label for="arene">arène:</label><br>
+           <input type="text" name="arene"><br>
    <input type="submit" name="valider">
-   <?php } ?></p>
        </form>
 
 
+   <button id="supp">supprimer raid ex</button>
+
+   <?php } ?></p>
+
+
+   <button onclick="ajout()">Inscrire ses petits comptes</button>
    <button onclick="redirect()">voir les inscrits</button>
+   <button onclick="redirectBis()">ajouter un petit compte nouveau !</button>
+   <button id="deco" >se déconnecter</button>
 
 
-   <script > /*function addField (argument) {
-           var myTable = document.getElementById("myTable");
-           var currentIndex = myTable.rows.length;
-           var currentRow = myTable.insertRow(-1);
-
-           var linksBox = document.createElement("input");
-           linksBox.setAttribute("name", "links" + currentIndex);
-
-           var keywordsBox = document.createElement("input");
-           keywordsBox.setAttribute("name", "keywords" + currentIndex);
-
-           var violationsBox = document.createElement("input");
-           violationsBox.setAttribute("name", "violationtype" + currentIndex);
-
-
-
-
-
-
-
-           var currentCell = currentRow.insertCell(-1);
-           currentCell.appendChild(linksBox);
-
-           currentCell = currentRow.insertCell(-1);
-           currentCell.appendChild(keywordsBox);
-
-           currentCell = currentRow.insertCell(-1);
-           currentCell.appendChild(violationsBox);
-
-           localStorage.setItem("inscrit", );*/
+   <script >
 
    function redirect(){
        window.location.href='tableau.php';
+   }
+
+   function redirectBis(){
+       window.location.href='second.php';
+   }
+
+   function ajout(){
+       window.location.href='ajoutsPetits.php'
    }
 
   function myFunction() {
@@ -111,6 +103,35 @@ Released   : 20130706
           x.style.display = "none";
       }
   }
+
+  function organiser(){
+      var x = document.getElementById("organiser");
+      if (x.style.display = "none") {
+          x.style.display = "block";
+      } else {
+          x.style.display = "none";
+      }
+
+  }
+
+
+
+
   </script>
+
+   <script type="text/javascript">
+       $(document).ready(function(){
+           $(#supp).click(function(){
+
+               $.ajax({
+                   type: 'POST',
+                   url: 'cron.php',
+                   success: function(data) {
+                       $("p").text(data);
+                   }
+               });
+           });
+       });
+   </script>
    </body>
 </html>

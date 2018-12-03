@@ -1,26 +1,20 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto+Slab);
-* {
-    /* With these codes padding and border does not increase it's width and gives intuitive style.*/
+html,body {
+    height:100%;width:100% }
 
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-}
 body {
-    float:left;
-    width:100%;
-    height:80%;
-    background: url('main.jpg') no-repeat center center fixed;
+    background: url('main.png') no-repeat center center fixed;
+
+    background-size: cover;
+    /* For older browsers */
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;
-    font-family: 'Roboto Slab', serif;
-}
+    min-height:800px;}
 div#envelope{
     width: 55%;
-    margin: 10px 30% 10px 10%;
-    padding:10px 0;
+    margin: 10px 10% 10px 10%;
+    padding:0px 0;
     border: 2px solid gray;
     border-radius:10px;
 }
@@ -75,7 +69,7 @@ input[type=submit]
 button {
     margin-bottom: 20px;
    margin-left: 10px;
-    width:20%;
+    width:40%;
     padding: 15px;
     border-radius:5px;
     border:1px solid #7ac9b7;
@@ -107,4 +101,8 @@ textarea{
 }
 input[type=text]:focus,textarea:focus {
     border-color: #4697e4;
+}
+
+input[type=checkbox]{
+    color: whitesmoke;
 }

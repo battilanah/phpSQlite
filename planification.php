@@ -1,5 +1,5 @@
 <?php
-if( isset($_POST['date']) AND isset($_POST['appt'] )) {
+if( isset($_POST['jour']) AND isset($_POST['appt'] )AND isset($_POST['arene'] )) {
 
     $db = new PDO('sqlite:pokemon.db');
 
@@ -13,24 +13,23 @@ if( isset($_POST['date']) AND isset($_POST['appt'] )) {
          )
              ");
 
-    $jour=$_POST['date'];
+    $jour=$_POST['jour'];
     $heure=$_POST['appt'];
+    $arene=$_POST['arene'];
 
 
 
-    $req = "INSERT INTO planification (jour, heure) VALUES(:jour, :heure )";
-    $stmt = $db->prepare($req);
-    $stmt->bindParam(':jour', $jour);
-    $stmt->bindParam(':heure', $heure);
-    $stmt->execute();
-    /*  //AFFICHAGE DE TOUS LES UTILISATEURS
-      $stmt = $db->prepare("SELECT * FROM users");
-      $stmt->execute();
-      $result = $stmt->fetchAll();
-      print_r($result);*/
-    header('location:session.php');
 
-}
+             $req = "INSERT INTO planification (jour, heure, arène) VALUES(:jour, :appt, :arène )";
+             $stmt = $db->prepare($req);
+             $stmt->bindParam(':jour', $jour);
+             $stmt->bindParam(':appt', $heure);
+             $stmt->bindParam(':arène', $arene);
+             $stmt->execute();
+
+             header('location:session.php');
+
+         }
 
 
 ?>

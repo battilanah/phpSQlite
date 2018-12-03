@@ -7,7 +7,7 @@ session_start();
 <!DOCTYPE html>
 <html>
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
     <meta charset="utf-8" />
     <title>Mon Compte</title>
     <meta charset="utf-8" />
@@ -23,17 +23,24 @@ session_start();
 
 
 
-        <p>Veuillez entrer un nom d'utilisateur et un mot de passe:</p>
+        <p style="color:whitesmoke;">Veuillez entrer un nom d'utilisateur, votre couleur et un mot de passe:</p>
         <form action="data.php" method="post">
-            <p><label for="pseudo">Votre pseudo de joueur</label><br>
+            <p><label for="pseudo" style="color: whitesmoke;">Votre pseudo de joueur</label><br>
                 <input type="text" name="pseudo" placeholder="Votre pseudo de joueur"><br>
-                <label for="couleur">votre couleur</label>
+
+               <!--<input type="text" name="couleur" placeholder="rouge, bleu ou jaune (respecter cette orthographe :p)" />
+               --> <br>
+                <label for="mot_de_passe" style="color: whitesmoke">Votre mdp</label>
                 <br>
-                <input type="text" name="couleur" placeholder="Votre couleur" />
-                <br>
-                <label for="mot_de_passe">Votre mdp</label>
-                <br>
-            <input type="password" name="mot_de_passe" placeholder="Votre mdp" />
+                <input type="password" name="mot_de_passe" placeholder="Votre mdp" /><br>
+
+                <label for="couleur" style="color: black">votre couleur</label><br>
+
+                <input type="checkbox" id="premier" name="couleur" value="bleu" ><label for="premier" style="color: whitesmoke">bleu</label><br>
+                <input type="checkbox" id="deuxieme" name="couleur" value="rouge" ><label for="deuxieme" style="color: whitesmoke">rouge</label><br>
+                <input type="checkbox" id="troisieme" name="couleur" value="jaune" ><label for="troisieme" style="color: whitesmoke">jaune</label><br><br>
+
+
 
             <input type="submit" value="Valider" style="width: 50%;" />
             </p>

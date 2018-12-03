@@ -1,6 +1,7 @@
 
 <?php
 session_start();
+
 ?>
 
 
@@ -25,44 +26,43 @@ session_start();
 
     </head>
     <body>
-        <p>Possédez vous des petits comptes?</p>
+
+
+    <div id="envelope">
+        <p style="color: whitesmoke">Possédez vous des petits comptes?</p>
         <button onclick="myFunction()">oui</button>
         <button onclick="Redirect()">non</button>
-        <form  id="myForm"  method="post" style="display: none">
+        <form  id="myForm" action="form.php"  method="post" style="display: none">
 
-                <label for="petits">Combien de petits comptes possédez-vous?</label>
-                <input type="text" name="petits" id="petits"/>
+                <label for="petits" style="color: whitesmoke">Combien de petits comptes possédez-vous?</label>
+                <input type="text" name="petits"/>
+            <input type="submit" name="valider"/>
 
-                <input type="submit" value="Valider"  id="validate" onclick="openModal()"/>
-            
         </form>
+        </div>
+            <!--   <input type="submit" value="Valider"  id="validate" onclick="openModal()"/>
 
-            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display : none" >
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <?php
-                            if (isset($_POST['petits'])){
-                                $numPetitsComptes = $_POST['petits'];
-                                for ( $i=0; $i<$numPetitsComptes; $i++) {
-                                    ?> <input type="text" name ="pseudo">
-                                    </br>
 
-                                <?php } }?>
 
-                        </div>
-                        <div class="modal-footer">
+           <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display : none" >
+               <div class="modal-dialog" role="document">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                               <span aria-hidden="true">&times;</span>
+                           </button>
+                       </div>
+                       <div class="modal-body">
+                       <p>hey</p>
 
-                        </div>
-                    </div>
-                </div>
-            </div>
+                       </div>
+                       <div class="modal-footer">
+
+                       </div>
+                   </div>
+               </div>
+           </div>-->
 
         <script>
 
@@ -80,28 +80,9 @@ session_start();
             function Redirect(){
                 window.location.href='index.php';
             }
-    function openModal(){
-     var a = document.getElementById("exampleModal");
-     if (a.style.display === "none") {
-         a.style.display = "block";
-     } else {
-         a.style.display = "none";
-     }
- }
 
-                $("#myForm").on("submit",function(e){
-                    e.preventDefault();
-                    $.ajax({
-                        type : 'POST',
-                        data: $("#myForm").serialize(),
-                        url : 'url',
-                        success : function(data){
-                            $("#myModal").modal("show");
 
-                        }
-                    });
-                    return false;
-                });
+
         </script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>

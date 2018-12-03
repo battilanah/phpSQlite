@@ -14,11 +14,14 @@ Released   : 20130706
 <head>
     <style>
         body{
-            background: url("tab.png") no-repeat center center fixed;
+            background: url('tab.png') no-repeat center center fixed;
+
+            background-size: cover;
+            /* For older browsers */
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
-            background-size: cover;
+            min-height:800px;}
 
         }
     </style>
@@ -34,7 +37,7 @@ Released   : 20130706
 </head>
 <body>
 
-<div><?php
+<?php
 
 $db = new PDO('sqlite:pokemon.db');
 
@@ -45,7 +48,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 
 
-$reqBlue = "SELECT * FROM inscrits WHERE couleur='bleu'  ";
+$reqBlue = "SELECT * FROM inscrits WHERE couleur='bleu' or couleur='Bleu' ";
 $stmtBlue = $db->prepare($reqBlue);
 
 
@@ -53,19 +56,45 @@ $stmtBlue->execute();
 $rowBlue = $stmtBlue->fetch();
 
 
-    $reqYellow = "SELECT * FROM inscrits WHERE couleur='jaune' ";
+    $reqYellow = "SELECT * FROM inscrits WHERE couleur='jaune' or couleur='Jaune' ";
     $stmtYellow = $db->prepare($reqYellow);
 
 
     $stmtYellow->execute();
     $rowYellow = $stmtYellow->fetch();
 
-    $reqRed = "SELECT * FROM inscrits WHERE couleur='rouge' ";
+    $reqRed = "SELECT * FROM inscrits WHERE couleur='rouge' or couleur='Rouge' ";
     $stmtRed = $db->prepare($reqRed);
 
 
     $stmtRed->execute();
     $rowRed = $stmtRed->fetch();
+
+
+$reqBlueBis = "SELECT * FROM inscriptionPetits WHERE couleurPetit='bleu'  or couleurPetit='Bleu' ";
+$stmtBlueBis = $db->prepare($reqBlueBis);
+
+
+$stmtBlueBis->execute();
+$rowBlueBis = $stmtBlueBis->fetch();
+
+
+$reqYellowBis = "SELECT * FROM inscriptionPetits WHERE couleurPetit='jaune' or couleurPetit='Jaune' ";
+$stmtYellowBis = $db->prepare($reqYellowBis);
+
+
+$stmtYellowBis->execute();
+$rowYellowBis = $stmtYellowBis->fetch();
+
+$reqRedBis = "SELECT * FROM inscriptionPetits WHERE couleurPetit='rouge' or couleurPetit='Rouge' ";
+$stmtRedBis = $db->prepare($reqRedBis);
+
+
+
+$stmtRedBis->execute();
+$rowRedBis = $stmtRedBis->fetch();
+
+var_dump($rowRedBis);
 
 
 
@@ -76,12 +105,13 @@ $rowBlue = $stmtBlue->fetch();
   $result = $stmt->fetchAll();
   print_r($result);
 */
-$reqBis = "SELECT * FROM planification  ";
+$reqBis = "SELECT * FROM planification  WHERE   ID = (SELECT MAX(ID)  FROM planification);";
 $stmtBis = $db->prepare($reqBis);
 
 
 $stmtBis->execute();
 $rowBis = $stmtBis->fetch();
+ 
 
 if (isset($rowBis['jour']) and isset($rowBis['heure']) and isset($rowBis['arène'])) {
     echo "<p>" . $rowBis['arène'] . "</p>";
@@ -98,12 +128,19 @@ echo "<table border='1'>
 
 
 
-while($testBlue = $stmtBlue->fetch())
-{
-    echo "<tr>";
-    echo "<td>" . $testBlue['name']. "</td>";
+    while ($testBlue = $stmtBlue->fetch()) {
 
-    echo "</tr>";
+        echo "<tr>";
+        echo "<td>" . $testBlue['name'] . "</td>";
+    }
+
+        echo "</tr>";
+        while($testBlueBis = $stmtBlueBis->fetch()) {
+        echo "<tr>";
+        echo "<td>" . $testBlueBis['petitPseudo'] . "</td>";
+
+        echo "</tr>";
+
 }
 echo "</table> </br>";
 
@@ -114,13 +151,20 @@ echo "</table> </br>";
 
 </tr>";
 
-    while($testYellow= $stmtYellow->fetch())
-    {
+    while ($testYellow = $stmtYellow->fetch()) {
+
         echo "<tr>";
-        echo "<td>" . $testYellow['name']. "</td>";
+        echo "<td>" . $testYellow['name'] . "</td>";
 
         echo "</tr>";
     }
+        while($testYellowBis = $stmtYellowBis->fetch()) {
+        echo "<tr>";
+        echo "<td>" . $testYellowBis['petitPseudo'] . "</td>";
+
+        echo "</tr>";
+
+}
 echo "</table>  </br>";
 
     echo "<table border='1'>
@@ -130,17 +174,25 @@ echo "</table>  </br>";
 
 </tr>";
 
-while($testRed = $stmtRed->fetch())
-{
-    echo "<tr>";
-    echo "<td>" . $testRed['name']. "</td>";
+while($testRed = $stmtRed->fetch()) {
 
-    echo "</tr>";
+        echo "<tr>";
+        echo "<td>" . $testRed['name'] . "</td>";
+
+        echo "</tr>";
+    }
+
+while ($testRedBis = $stmtRedBis->fetch()) {
+        echo "<tr>";
+        echo "<td>" . $testRedBis['petitPseudo'] . "</td>";
+
+        echo "</tr>";
+
 }
 echo "</table>";
 
 ?>
-</div>
+
 <button onclick="myFunction()">Revenir à ma session</button>
 <script>
     function myFunction(){

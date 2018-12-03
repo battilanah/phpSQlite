@@ -7,8 +7,10 @@ session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>FormGet Responsive Form</title>
+    <title>Raid EX - Guests</title>
     <!-----Including CSS for different screen sizes----->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,height=device-height, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="responsiveform.css">
     <link rel="stylesheet" media="screen and (max-width: 1200px) and (min-width: 601px)" href="responsiveform1.css" />
     <link rel="stylesheet" media="screen and (max-width: 600px) and (min-width: 351px)" href="responsiveform2.css" />
@@ -16,19 +18,20 @@ session_start();?>
 
 </head>
 <body>
+
 <div id="envelope">
     <form action="secret.php" method="post">
         <header>
             <h2>Guest - Raids ex</h2>
             <p>C'est parti pour un raid ex!</p>
         </header>
-        <label>Votre pseudo</label>
+        <label style="color: whitesmoke">Votre pseudo</label>
         <input name="pseudo" placeholder="Votre pseudo" type="text" width="100px;">
-        <label>Votre mot de passe</label>
+        <label style="color: whitesmoke">Votre mot de passe</label>
         <input name="mot_de_passe" placeholder="password" type="password">
-        <label>Lien vers Guests</label>
+        <label style="color: whitesmoke">Lien vers Guests</label>
         <input name="website" placeholder="https://www.facebook.com/groups/210644012850565" type="text">
-        <label>Message</label>
+        <label style="color: whitesmoke">Message</label>
         <textarea cols="15" name="message" placeholder="Message" rows="10">
 </textarea>
         <div id="validation">
